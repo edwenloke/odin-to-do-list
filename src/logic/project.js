@@ -1,12 +1,13 @@
 class Project {
-    constructor(name){
+    constructor(name, isDefault = false){
         this.id = crypto.randomUUID();
         this.name = name;
+        this.isDefault = isDefault;
         this.todos = [];
     }
 
-    update({name}){
-        if(name !== undefined) this.name = name;
+    rename(name){
+        this.name = name;
     }
 
     addTodo(todo){
@@ -22,14 +23,6 @@ class Project {
 
         if (index !== -1) {
             this.todos.splice(index, 1);
-        }
-    }
-
-    updateTodo(id, updates){
-        const todo = this.getTodo(id);
-
-        if (todo){
-            todo.update(updates)
         }
     }
 
