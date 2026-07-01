@@ -1,14 +1,16 @@
 const Project = require('./project')
 
 class App {
-    constructor() {
+    constructor(createDefault = true) {
         this.projects = [];
         this.activeProjectId = null;
 
         // create default project
-        const defaultProject = new Project('Default', true);
-        this.addProject(defaultProject);
-        this.setActiveProject(defaultProject.id)
+        if (createDefault) {
+            const defaultProject = new Project({ name: 'Default', isDefault: true });
+            this.addProject(defaultProject);
+            this.setActiveProject(defaultProject.id)
+        }
     }
 
     getProject(id) {
@@ -16,7 +18,7 @@ class App {
     }
 
     addProject(project) {
-        this.projects.splice(1, 0, project);
+        this.projects.push(project);
     }
 
     deleteProject(id) {
@@ -36,7 +38,7 @@ class App {
     setActiveProject(id) {
         const project = this.getProject(id);
         if (!project) return;
-        
+
         this.activeProjectId = id;
 
     }

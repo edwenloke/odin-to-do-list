@@ -1,6 +1,6 @@
 class Project {
-    constructor(name, isDefault = false){
-        this.id = crypto.randomUUID();
+    constructor({name, isDefault = false, id = crypto.randomUUID()}){
+        this.id = id;
         this.name = name;
         this.isDefault = isDefault;
         this.todos = [];
@@ -11,7 +11,7 @@ class Project {
     }
 
     addTodo(todo){
-        this.todos.unshift(todo);
+        this.todos.push(todo);
     }
 
     getTodo(id){
